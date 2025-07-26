@@ -302,6 +302,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 
         renderSchedule();
+        analyzeBottleneck();
     }
 
     function renderSchedule() {
@@ -371,6 +372,41 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // --- ANALYTICS & REPORTING ---
     const kpiContainer = document.getElementById('kpi-container');
+    const bottleneckDisplay = document.getElementById('bottleneck-display');
+
+    function analyzeBottleneck() {
+        if (schedule.length === 0) {
+            bottleneckDisplay.textContent = 'N/A';
+            return;
+        }
+
+        const utilization = {};
+        let maxUtilization = 0;
+        let bottleneck = 'N/A';
+
+        for (const type in masterData.equipment) {
+            const resources = masterData.equipment[type];
+            if (resources.length === 0) continue;
+
+            let totalScheduledTime = 0;
+            resources.forEach(resource => {
+                systemState.resourceSchedules[resource.id].forEach(event => {
+                    if (event.task !== 'CIP' && event.task !== 'Changeover') {
+                        totalScheduledTime += (event.endTime - event.start);
+                    }
+                });
+            });
+
+            const avgUtilization = totalScheduledTime / resources.length;
+            utilization[type] = avgUtilization;
+
+            if (avgUtilization > maxUtilization) {
+                maxUtilization = avgUtilization;
+                bottleneck = type;
+            }
+        }
+        bottleneckDisplay.textContent = bottleneck;
+    }
 
     function calculateAndRenderKPIs() {
         let html = '<table><tr><th>Resource Type</th><th>Utilization</th></tr>';
@@ -404,6 +440,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         html += '</table>';
         kpiContainer.innerHTML = html;
+        analyzeBottleneck();
     }
 
 
@@ -518,4 +555,5 @@ document.addEventListener('DOMContentLoaded', () => {
     calculateAndRenderKPIs();
     populateBreakdownSelect();
     populateTankSelect();
+    analyzeBottleneck();
 });
