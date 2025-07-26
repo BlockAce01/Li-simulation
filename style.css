@@ -1,0 +1,152 @@
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    line-height: 1.6;
+    background-color: #f4f7f9;
+    color: #333;
+    margin: 0;
+    padding: 20px;
+}
+
+header {
+    background-color: #005a9c;
+    color: white;
+    padding: 1rem;
+    text-align: center;
+    margin-bottom: 20px;
+    border-radius: 8px;
+}
+
+h1 {
+    margin: 0;
+    font-size: 2rem;
+}
+
+main {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.module {
+    background-color: #ffffff;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    flex: 1 1 calc(33% - 40px); /* Three columns layout */
+    min-width: 300px;
+    display: flex;
+    flex-direction: column;
+}
+
+.module h2 {
+    margin-top: 0;
+    color: #005a9c;
+    border-bottom: 2px solid #e0e0e0;
+    padding-bottom: 10px;
+    font-size: 1.25rem;
+}
+
+/* Simple table styling for data display */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 15px;
+}
+
+th, td {
+    text-align: left;
+    padding: 8px;
+    border-bottom: 1px solid #ddd;
+}
+
+th {
+    background-color: #f2f2f2;
+}
+
+/* Button styling */
+button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+    margin-top: 10px;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+/* Form styling */
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.form-group input, .form-group select {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+/* Tank grid for resource visualization */
+.tank-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(50px, 1fr));
+    gap: 5px;
+    margin-bottom: 15px;
+}
+
+.tank {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 50px;
+    color: white;
+    border-radius: 4px;
+    font-size: 0.8rem;
+    font-weight: bold;
+    cursor: default;
+}
+
+/* Tank status colors */
+.tank.empty { background-color: #28a745; } /* Green */
+.tank.cip { background-color: #17a2b8; } /* Teal */
+.tank.ready { background-color: #4CAF50; } /* Darker Green */
+.tank.filling { background-color: #ffc107; color: #333; } /* Yellow */
+.tank.fermenting { background-color: #007bff; } /* Blue */
+.tank.conditioning { background-color: #6f42c1; } /* Purple */
+.tank.emptying { background-color: #fd7e14; } /* Orange */
+.tank.in-use { background-color: #dc3545; } /* Red */
+.tank.maintenance { background-color: #6c757d; } /* Grey */
+
+/* Alerts styling */
+#alerts-content .alert {
+    padding: 10px 15px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    border: 1px solid transparent;
+}
+#alerts-content .alert.alert-error {
+    color: #721c24;
+    background-color: #f8d7da;
+    border-color: #f5c6cb;
+}
+#alerts-content .alert.alert-warning {
+    color: #856404;
+    background-color: #fff3cd;
+    border-color: #ffeeba;
+}
+#alerts-content .alert.alert-info {
+    color: #0c5460;
+    background-color: #d1ecf1;
+    border-color: #bee5eb;
+}

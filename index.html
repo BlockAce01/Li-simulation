@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Production Planning & Optimization System (PPOS)</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>Production Planning & Optimization System (PPOS)</h1>
+    </header>
+    <main>
+        <div id="master-data-module" class="module">
+            <h2>1. Master Data Module</h2>
+            <div id="master-data-content"></div>
+            <form id="capacity-form">
+                <h4>Update Tank Capacity</h4>
+                <div class="form-group">
+                    <label for="tank-select">Select Tank:</label>
+                    <select id="tank-select"></select>
+                </div>
+                <div class="form-group">
+                    <label for="capacity-input">New Capacity:</label>
+                    <input type="number" id="capacity-input" min="1" required>
+                </div>
+                <button type="submit">Update Capacity</button>
+            </form>
+        </div>
+        <div id="demand-intake-module" class="module">
+            <h2>2. Demand Intake Module</h2>
+            <div id="demand-intake-content">
+                <form id="demand-form">
+                    <div class="form-group">
+                        <label for="sku-select">Product SKU:</label>
+                        <select id="sku-select" name="sku"></select>
+                    </div>
+                    <div class="form-group">
+                        <label for="quantity-input">Weekly Quantity:</label>
+                        <input type="number" id="quantity-input" name="quantity" min="1" required>
+                    </div>
+                    <button type="submit">Add to Demand Plan</button>
+                </form>
+                <h4>Weekly Demand Plan</h4>
+                <table id="demand-plan-table">
+                    <thead>
+                        <tr>
+                            <th>SKU</th>
+                            <th>Quantity</th>
+                            <th>Fulfilled</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </div>
+        <div id="resource-management-module" class="module">
+            <h2>3. Resource Management Module</h2>
+            <div id="resource-management-content"></div>
+            <div id="scenario-planner">
+                <h4>"What-If" Scenario Planner</h4>
+                <div class="form-group">
+                    <label for="breakdown-select">Simulate Breakdown:</label>
+                    <select id="breakdown-select"></select>
+                </div>
+                <button id="breakdown-btn">Trigger Breakdown</button>
+            </div>
+        </div>
+        <div id="scheduling-engine-module" class="module">
+            <h2>4. Production Scheduling Engine</h2>
+            <div id="scheduling-engine-content">
+                <button id="generate-schedule-btn">Generate Weekly Schedule</button>
+                <h4>Production Schedule</h4>
+                <table id="schedule-table">
+                    <thead>
+                        <tr>
+                            <th>Start Time</th>
+                            <th>End Time</th>
+                            <th>Task</th>
+                            <th>Resource</th>
+                            <th>Product</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </div>
+        <div id="execution-monitoring-module" class="module">
+            <h2>5. Execution & Monitoring Module</h2>
+            <div id="execution-monitoring-content">
+                <h4>Simulation Control</h4>
+                <p>Current Time: <span id="current-time-display">Hour 0</span></p>
+                <button id="next-hour-btn">Advance 1 Hour</button>
+                <button id="next-day-btn">Advance 24 Hours</button>
+            </div>
+        </div>
+        <div id="analytics-reporting-module" class="module">
+            <h2>6. Analytics & Reporting Module</h2>
+            <div id="analytics-reporting-content">
+                <h4>Key Performance Indicators (KPIs)</h4>
+                <div id="kpi-container"></div>
+            </div>
+        </div>
+        <div id="alerts-module" class="module" style="flex-basis: 100%;">
+            <h2>Alerts</h2>
+            <div id="alerts-content"></div>
+        </div>
+        <div id="missing-features-module" class="module" style="flex-basis: 100%;">
+            <h2>Missing Features & Next Steps</h2>
+            <div id="missing-features-content">
+                <ul>
+                    <li><strong>Dynamic Batch Sizing:</strong> The system currently assumes 1 demand entry = 1 batch. It should calculate the optimal number of batches based on demand quantity and tank volumes.</li>
+                    <li><strong>Bright Beer Tanks (BBTs):</strong> The model simplifies the flow from filtering to packaging. A dedicated BBT resource module is needed to act as a buffer and manage conditioning as a distinct stage.</li>
+                    <li><strong>Advanced Optimization:</strong> The scheduling engine is first-come, first-served. It should have optimization algorithms to minimize changeovers or maximize throughput by re-ordering the production queue.</li>
+                    <li><strong>"What-If" Scenarios:</strong> The core resilience feature of simulating equipment downtime or QC failures and dynamically rescheduling is not yet implemented.</li>
+                    <li><strong>Real-Time Alerts:</strong> The system should flag deviations from the plan (e.g., a task taking longer than scheduled) and alert the planner.</li>
+                    <li><strong>Detailed BOM & Inventory:</strong> Raw material consumption and finished goods inventory are not tracked.</li>
+                    <li><strong>Changeover & CIP Logic:</strong> The scheduling of non-productive time is basic. It should be more intelligent (e.g., no changeover time needed if packaging the same SKU twice).</li>
+                    <li><strong>Persistent State:</strong> The simulation resets on page load. The state should be saved (e.g., in localStorage) to be continued later.</li>
+                </ul>
+            </div>
+        </div>
+    </main>
+    <script src="script.js"></script>
+</body>
+</html>
